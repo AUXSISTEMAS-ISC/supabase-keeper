@@ -2,9 +2,8 @@ name: Mantener Supabase Activo
 
 on:
   schedule:
-    # Se ejecuta a las 00:00 todos los martes y viernes (UTC)
     - cron: '0 0 * * 2,5'
-  workflow_dispatch: # Permite ejecutarlo manualmente desde GitHub
+  workflow_dispatch:
 
 jobs:
   ping:
@@ -12,6 +11,6 @@ jobs:
     steps:
       - name: Hacer ping a la API de Supabase
         run: |
-          curl -i -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/" \
+          curl -i -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/?" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
